@@ -1,6 +1,6 @@
 {
-    "name": "sauvank/packages-composer",
-    "description": "A simple hello world composer package",
+    "name": "sauvank/php-console-table",
+    "description": "Display a table in the console from parameters.",
     "type": "package",
     "authors": [
         {

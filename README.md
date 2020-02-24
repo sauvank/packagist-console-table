@@ -1,6 +1,6 @@
 # packagist_prompt_table
 
-### Display a heel in the console from parameters. Order management via realine.
+### Display a table in the console from parameters.
    
 #### Install : 
 `composer require sauvank/packages-composer`
