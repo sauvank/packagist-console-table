@@ -1,4 +1,4 @@
-# packagist_prompt_table
+# packagist console table
 
 ### Display a table in the console from parameters.
    
