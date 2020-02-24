@@ -1,0 +1,28 @@
+{
+    "name": "sauvank/packages-composer",
+    "description": "A simple hello world composer package",
+    "type": "package",
+    "authors": [
+        {
+            "name": "John Smith",
+            "email": "john@smith.com"
+        }
+    ],
+    "license": "mit",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "ConsoleTable": "src/"
+        }
+    },
+    "extra": {
+        "class": "PackageVersions\\Installer",
+        "branch-alias": {
+            "dev-master": "1.0.0-dev",
+            "stable-master": "1.0.0-dev"
+        }
+    }
+}
