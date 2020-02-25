@@ -1,9 +1,9 @@
-# packagist_prompt_table
+# packagist console table
 
 ### Display a table in the console from parameters.
    
 #### Install : 
-`composer require sauvank/packages-composer`
+`composer require sauvank/php-console-table`
 
 #### Doc :
 
