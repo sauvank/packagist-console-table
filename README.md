@@ -122,3 +122,20 @@ $defaultValue = 0; // key index of the $option array.
 $userAnswer = new Readline($txtToShow, $option, $defaultValue);
 
 ```
+
+#### Confirm the last choice :
+> Add a prompt for confim choice.
+
+```PHP
+use ConsoleTable\Readline;
+
+$readline= new Readline("line to show", ['1', '2']);
+$confirm = $readline->confirm(); // return true or false
+
+if($confirm){
+    echo "You have confirmed your choice " . $readline->getAnswer();
+}else{
+    echo "You have not confirm your choice.\n";
+}
+
+```
