@@ -35,7 +35,7 @@ $conf = [
 ];
 $pt = new Table($columns, $lines, $conf);
 
-$readline= new Readline("line to show", ['1', '2']);
+$readline= new Readline("line to show", ['AaA', 'bBb']);
 $confirm = $readline->confirm();
 
 if($confirm){

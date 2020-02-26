@@ -23,7 +23,7 @@ class Readline{
 
         // Upper default value params if is active.
         if($activeParams && $defaultValueIndex >= 0){
-            $availableParams[$defaultValueIndex] = strtoupper($availableParams[$defaultValueIndex]);
+            $availableParams[$defaultValueIndex] = strtoupper(ucfirst($availableParams[$defaultValueIndex]));
         }
 
         $txt = $activeParams ? $txt .= " (". implode('/', $availableParams) . ")" : $txt;
@@ -34,7 +34,7 @@ class Readline{
         if($activeParams){
             if(strlen($this->answer) === 0 && $defaultValueIndex >= 0){
                 $this->answer = $availableParams[$defaultValueIndex];
-            }elseif (array_search($this->answer, $availableParams) === false){
+            }elseif (array_search(strtolower($this->answer),  array_map('strtolower', $availableParams)) === false){
                 $result = new Readline("The answer $this->answer is invalid, please enter valid value", $availableParams, $defaultValueIndex);
                 $this->answer = $result->getAnswer();
             }
@@ -50,7 +50,6 @@ class Readline{
         $this->choices("Choice: ".$this->answer."\nyou confirmed your choice ?", ['y', 'n'], 1);
         $choice = $this->answer;
         $this->answer = $previousChoice;
-        return $choice === "y";
+        return strtolower($choice) === "y";
     }
-
 }
