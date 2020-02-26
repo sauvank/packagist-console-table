@@ -12,7 +12,7 @@ class Table
     private $rowInString = [];
     private $columnTitleString = [];
 
-    public function __construct(array $dataColumn, array $lines, array $conf)
+    public function __construct(array $dataColumn, array $lines, array $conf = [])
     {
         //Conf
         $this->mlr = isset($conf['margin']) ? $conf['margin'] : $this->mlr;
