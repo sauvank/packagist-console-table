@@ -90,7 +90,7 @@ class Table
     private function addToColumn(string $txt, int $columnIndex): string {
         $sizeColumn = $this->dataColumn[$columnIndex]['size'];
         $name = self::cutString($txt, $sizeColumn);
-        $seperate = self::charGenerator(($sizeColumn - strlen($name))," ");
+        $seperate = self::charGenerator(($sizeColumn - mb_strlen($name))," ");
         $marginChar = self::charGenerator($this->mlr," ");
         return "|" . $marginChar . $name . $seperate . $marginChar;;
     }
@@ -102,7 +102,7 @@ class Table
      * @return string
      */
     private static function cutString(string $str, int $maxLength): string {
-        $lengthStr = strlen($str);
+        $lengthStr = mb_strlen($str);
         return $lengthStr > $maxLength ? substr_replace($str, "", $maxLength - $lengthStr) : $str;
     }
 
