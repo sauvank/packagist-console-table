@@ -113,7 +113,7 @@ class Table
      * @return false|string
      */
     private function lengthStr($str){
-        return  mb_strwidth(iconv("UTF-8", "ISO-8859-1//TRANSLIT", $str));
+        return  mb_strwidth($str);
     }
     /**
      * Cut a string is is too long.
@@ -126,6 +126,11 @@ class Table
         return $lengthStr > $maxLength ? substr($str, 0, $maxLength) : $str;
     }
 
+    private function getColData(int $indexCol): array {
+        return array_map(function ($val, $key) use($indexCol){
+            return $val[$indexCol];
+        }, $this->lines, array_keys($this->lines[$indexCol]));
+    }
     /**
      * Return the lenght of the table.
      * Sum of each length column.
@@ -167,8 +172,11 @@ class Table
 
                 // The default size column is not set, get the longest str length from line or header title.
                 if(!$this->defaultSizeCol){
-                    $maxLengthLine = $this->getMaxLengthStr($this->lines[$key], $key);
-                    $sizeHeader = mb_strwidth($col['name']);
+
+                    $this->getColData($key);
+
+                    $maxLengthLine = $this->getMaxLengthStr($this->getColData($key));
+                    $sizeHeader = $this->lengthStr($col['name']);
                     $col['size'] = $maxLengthLine > $sizeHeader ? $maxLengthLine : $sizeHeader;
                 }
 
@@ -178,15 +186,8 @@ class Table
     }
 
     private function getMaxLengthStr(array $arr, $onlyKey = false): int {
-        if(!$onlyKey){
-            return max(array_map('strlen', $arr));
-        }
+        return max(array_map('strlen', $arr));
 
-        $map = array_map(function ($value, $key) use ($onlyKey){
-            return $key === $onlyKey ? strlen($value) : null;
-        }, $arr, array_keys($arr));
-
-        return max($map);
     }
 
     private function separator($isBorder = false){
