@@ -123,7 +123,7 @@ class Table
      */
     private function cutString(string $str, int $maxLength): string {
         $lengthStr = $this->lengthStr($str);
-        return $lengthStr > $maxLength ? substr_replace($str, "", $maxLength - $lengthStr) : $str;
+        return $lengthStr > $maxLength ? substr($str, 0, $maxLength) : $str;
     }
 
     /**
