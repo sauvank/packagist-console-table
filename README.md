@@ -15,11 +15,9 @@
 use ConsoleTable\Table;
 
 $columns = [
-     [
-         'name' => 'title', // Title of the column
-         'size' => 30 // Maximum size in char
-     ],
-     [
+    'column title', // By default, the size column = 30 char
+
+     [ // If you want define custom size for this column 
          'name' => 'release',
          'size' => 10
      ]
@@ -36,10 +34,11 @@ $columns = [
     ],
 ];
 
- // Not required
+ // Optional
  $conf = [
-     'margin' => 1, // int , set space character beetween limit column. Default : 1
-     'showNumberRow' => true, // Bool, show the row number in table, by default : true
+     'margin' => 1, // int , Default : 1, set space character beetween limit column. 
+     'showNumberRow' => true, // Bool, default : true,  show the row number in table.
+     'defaultSizeCol' => 30, // int, default : 30, set default size column.
  ];
 
  $pt = new Table($columns, $lines, $conf);
@@ -50,7 +49,7 @@ $columns = [
 ````
 
 ------------------------------------------------------
-| Row  | title                          | release    |
+| Row  | column title                   | release    |
 ------------------------------------------------------
 | 1    | Fight club                     | 1999-11-10 |
 ------------------------------------------------------

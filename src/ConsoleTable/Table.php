@@ -11,16 +11,18 @@ class Table
     private $tableInString = "";
     private $rowInString = [];
     private $columnTitleString = [];
+    private $defaultSizeCol = 30;
 
     public function __construct(array $dataColumn, array $lines, array $conf = [])
     {
         //Conf
-        $this->mlr = isset($conf['margin']) ? $conf['margin'] : $this->mlr;
-        $this->showNumberRow = isset($conf['showNumberRow']) ? $conf['showNumberRow'] : $this->showNumberRow;
+        $this->setConf($conf);
 
+        $dataColumn = $this->parseDataTitleColumns($dataColumn);
         if($this->showNumberRow){
             array_unshift($dataColumn, ['name' => 'Row', 'size' => 4]);
         }
+
 
         $this->dataColumn = $dataColumn;
         $this->separatorLine = self::charGenerator(self::getLengthColumn($dataColumn), "-") . "\n";;
@@ -59,6 +61,11 @@ class Table
         $this->columnTitleString = $this->separatorLine.$columnString;
     }
 
+    private function setConf(array $conf){
+        $this->mlr = isset($conf['margin']) ? $conf['margin'] : $this->mlr;
+        $this->showNumberRow = isset($conf['showNumberRow']) ? $conf['showNumberRow'] : $this->showNumberRow;
+        $this->defaultSizeCol = isset($conf['defaultSizeCol']) ? $conf['defaultSizeCol'] : $this->defaultSizeCol;
+    }
     /**
      * Create row from params
      * @param array $lines
@@ -131,6 +138,18 @@ class Table
             $out .= "$char";
         }
         return $out;
+    }
+
+    private function parseDataTitleColumns(array $columns){
+        return array_map(function ($col){
+            if(!isset($col['name']) && !isset($col['size'])){
+                $col = [
+                    'name' => $col,
+                    'size' => $this->defaultSizeCol,
+                ];
+            }
+            return $col;
+        }, $columns);
     }
 }
 
