@@ -5,7 +5,7 @@
 #### Install : 
 `composer require sauvank/php-console-table`
 
-#### Doc :
+### Doc :
 
 #### Show Table from parameters :
 
@@ -15,7 +15,7 @@
 use ConsoleTable\Table;
 
 $columns = [
-    'column title', // By default, the size column = 30 char
+    'column title', // By default, the size of the column is equal to the big string in title column or row.
 
      [ // If you want define custom size for this column 
          'name' => 'release',
@@ -38,7 +38,7 @@ $columns = [
  $conf = [
      'margin' => 1, // int , Default : 1, set space character beetween limit column. 
      'showNumberRow' => true, // Bool, default : true,  show the row number in table.
-     'defaultSizeCol' => 30, // int, default : 30, set default size column.
+     'defaultSizeCol' => 30, // int, default : 30, for size column if key size not set in $column array key.
  ];
 
  $pt = new Table($columns, $lines, $conf);
@@ -48,13 +48,13 @@ $columns = [
 > Output in console :
 ````
 
-------------------------------------------------------
++------+--------------------------------+------------+
 | Row  | column title                   | release    |
-------------------------------------------------------
+-------|--------------------------------|------------|
 | 1    | Fight club                     | 1999-11-10 |
-------------------------------------------------------
+-------|--------------------------------|------------|
 | 2    | The lion king                  | 2019-07-17 |
-------------------------------------------------------
++------+--------------------------------+------------+
 
 ````
 
@@ -69,11 +69,11 @@ $columns = [
 > Output in console :
 ````
 
-------------------------------------------------------
++------+--------------------------------+------------+
 | Row  | title                          | release    |
-------------------------------------------------------
+|------|--------------------------------|------------|
 | 2    | The lion king                  | 2019-07-17 |
-------------------------------------------------------
++------+--------------------------------+------------+
 
 ````
 
@@ -138,3 +138,9 @@ if($confirm){
 }
 
 ```
+
+#### Todo
+
+- [ ] Custom color for header / row.
+- [ ] Multiple display type.
+- [ ] Option for center/left/right text table.

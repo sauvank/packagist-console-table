@@ -11,7 +11,7 @@ $columns = [
       'name' => 'column 2',
       'size' => 30
     ],
-    'i ma the big string',
+    'i am the big string',
 ];
 
 $lines = [
