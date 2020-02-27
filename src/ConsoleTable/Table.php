@@ -102,7 +102,7 @@ class Table
     private function addToColumn(string $txt, int $columnIndex): string {
         $sizeColumn = $this->headerColumn[$columnIndex]['size'];
         $name = self::cutString($txt, $sizeColumn);
-        $seperate = self::charGenerator(($sizeColumn - mb_strlen($name))," ");
+        $seperate = self::charGenerator(($sizeColumn - mb_strwidth($name))," ");
         $marginChar = self::charGenerator($this->mlr," ");
         return "|" . $marginChar . $name . $seperate . $marginChar;
     }
@@ -160,7 +160,7 @@ class Table
                 // The default size column is not set, get the longest str length from line or header title.
                 if(!$this->defaultSizeCol){
                     $maxLengthLine = $this->getMaxLengthStr($this->lines[$key]);
-                    $sizeHeader = mb_strlen($col['name']);
+                    $sizeHeader = mb_strwidth($col['name']);
                     $col['size'] = $maxLengthLine > $sizeHeader ? $maxLengthLine : $sizeHeader;
                 }
 
