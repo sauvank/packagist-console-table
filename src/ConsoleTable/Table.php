@@ -167,7 +167,7 @@ class Table
 
                 // The default size column is not set, get the longest str length from line or header title.
                 if(!$this->defaultSizeCol){
-                    $maxLengthLine = $this->getMaxLengthStr($this->lines[$key]);
+                    $maxLengthLine = $this->getMaxLengthStr($this->lines[$key], $key);
                     $sizeHeader = mb_strwidth($col['name']);
                     $col['size'] = $maxLengthLine > $sizeHeader ? $maxLengthLine : $sizeHeader;
                 }
@@ -177,8 +177,16 @@ class Table
         }, $columns, array_keys($columns));
     }
 
-    private function getMaxLengthStr(array $arr): int {
-        return max(array_map('strlen', $arr));
+    private function getMaxLengthStr(array $arr, $onlyKey = false): int {
+        if(!$onlyKey){
+            return max(array_map('strlen', $arr));
+        }
+
+        $map = array_map(function ($value, $key) use ($onlyKey){
+            return $key === $onlyKey ? strlen($value) : null;
+        }, $arr, array_keys($arr));
+
+        return max($map);
     }
 
     private function separator($isBorder = false){
@@ -200,7 +208,3 @@ class Table
         }, $this->headerColumn);
     }
 }
-
-
-
-
