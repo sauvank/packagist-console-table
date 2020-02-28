@@ -127,9 +127,15 @@ class Table
     }
 
     private function getColData(int $indexCol): array {
-        return array_map(function ($val, $key) use($indexCol){
-            return $val[$indexCol];
-        }, $this->lines, array_keys($this->lines[$indexCol]));
+        $output = [];
+        foreach ($this->lines as $row){
+            foreach ($row as $key => $value){
+                if($key === $indexCol){
+                    $output[] = $value;
+                }
+            }
+        }
+        return $output;
     }
     /**
      * Return the lenght of the table.
