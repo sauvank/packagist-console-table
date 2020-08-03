@@ -45,11 +45,25 @@ class Readline{
         return $this->answer;
     }
 
-    public function confirm() :bool {
+    /**
+     * Show confirm message to CLI
+     * @param string $msg message to show, by default : Do you want to confirm your choice ?
+     * @param array|string[] $option list of options available by default [y,n]
+     * @param int $defaultIndexValue index of the array of the default value (if the user validates without giving an answer). default 1
+     * @param int $indexConfirmOption Index of the $option value that corresponds to the validation
+     * @return bool
+     * @throws \Exception
+     */
+    public function confirm(string $msg = 'Do you want to confirm your choice ?', array $option = ['y', 'n'], $defaultIndexValue = 1, $indexConfirmOption = 0) :bool {
+
+        if(!isset($option[$indexConfirmOption])){
+            throw new \Exception("invalid defaultIndexValue params !\n");
+        }
+
         $previousChoice = $this->answer;
-        $this->choices("Choice: ".$this->answer."\nyou confirmed your choice ?", ['y', 'n'], 1);
+        $this->choices($msg, $option, $defaultIndexValue);
         $choice = $this->answer;
         $this->answer = $previousChoice;
-        return strtolower($choice) === "y";
+        return strtolower($choice) === $option[$indexConfirmOption];
     }
 }
