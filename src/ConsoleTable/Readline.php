@@ -7,8 +7,12 @@ class Readline{
 
     private $answer = "";
 
-    public function __construct(string $txt, array $availableParams = [], int $defaultValueIndex = -1)
+    public function __construct(?string $txt, array $availableParams = [], int $defaultValueIndex = -1)
     {
+        if($txt === null){
+            return $this;
+        }
+
         if($defaultValueIndex >= 0 && $defaultValueIndex > count($availableParams)){
             throw new \Exception("invalid defaultValueIndex params !\n");
             return;

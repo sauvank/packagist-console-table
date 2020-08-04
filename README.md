@@ -139,6 +139,21 @@ if($confirm){
 
 ```
 
+#### Only get confirm option without readline txt :
+````
+use ConsoleTable\Readline;
+
+$readline= new Readline(null);
+$confirm = $readline->confirm(); // return true or false
+
+if($confirm){
+    echo "You have confirmed your choice " . $readline->getAnswer();
+}else{
+    echo "You have not confirm your choice.\n";
+}
+
+````
+
 #### Todo
 
 - [ ] Custom color for header / row.
